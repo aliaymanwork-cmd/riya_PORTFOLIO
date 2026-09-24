@@ -84,7 +84,11 @@ window.addEventListener('scroll',()=>document.getElementById('nav').style.backgr
 
     function show(nextIndex) {
       index = (nextIndex + slides.length) % slides.length;
-      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === index);
+        slide.classList.toggle('is-next', i === (index + 1) % slides.length);
+        slide.classList.toggle('is-prev', i === (index - 1 + slides.length) % slides.length);
+      });
       dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
       if (count) count.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
     }

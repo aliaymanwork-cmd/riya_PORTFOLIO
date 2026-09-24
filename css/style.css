@@ -261,11 +261,12 @@
 }
 
 /* =========================================================
-   FINAL POLISH — desktop gallery + mobile carousel + hero
+   FINAL RESPONSIVE GALLERY PASS
+   Desktop: full-image editorial masonry / Mobile: stacked swipe deck
    ========================================================= */
 
-/* Desktop hero: preserve the complete portrait instead of cropping it. */
 @media (min-width:901px){
+  /* Hero — show the complete portrait cleanly */
   .hero-layout{grid-template-columns:minmax(0,1.08fr) minmax(390px,.72fr);gap:6vw;align-items:center;}
   .hero-copy{padding-top:20px;}
   .desktop-hero-photo{
@@ -273,70 +274,71 @@
     justify-self:end;
     aspect-ratio:3 / 4;
     max-height:68vh;
-    background:#0b0b0b;
+    background:#090909;
     border:1px solid rgba(255,255,255,.12);
     overflow:hidden;
     box-shadow:0 25px 80px rgba(0,0,0,.28);
   }
   .desktop-hero-photo img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+    width:100%;height:100%;display:block;
+    object-fit:contain !important;
     object-position:center;
     background:#090909;
     filter:grayscale(100%) contrast(1.08);
-    mix-blend-mode:normal;
-    opacity:1;
+    mix-blend-mode:normal;opacity:1;
   }
   .hero-bg{right:-7vw;top:13vh;width:48vw;height:48vw;opacity:.72;}
 
-  /* Desktop = editorial gallery, every image completely visible. */
+  /* Selected Work — no carousel on laptop. Every source image keeps its full ratio. */
   .work-carousel{max-width:1280px;margin:0 auto;}
   .work-track{
     display:grid !important;
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:0 !important;
-    overflow:hidden;
+    align-items:stretch;
     border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
     background:#080808;
-    align-items:start;
   }
+  .gallery-column{display:flex;flex-direction:column;min-width:0;}
+  .gallery-column + .gallery-column{border-left:1px solid rgba(255,255,255,.09);}
   .work-slide,
   .work-slide.is-active{
     display:block !important;
-    position:relative;
-    min-height:0 !important;
-    height:auto !important;
+    position:relative !important;
+    width:100%;height:auto !important;min-height:0 !important;
     border:0;
     border-right:1px solid rgba(255,255,255,.09);
     border-bottom:1px solid rgba(255,255,255,.09);
     overflow:hidden;
-    animation:none !important;
     background:#080808;
+    animation:none !important;
   }
-  .work-slide:nth-child(3n){border-right:0;}
-  .work-slide:nth-child(n+4){border-bottom:0;}
+  .gallery-column .work-slide{border-right:0;}
+  .gallery-column .work-slide + .work-slide{border-top:1px solid rgba(255,255,255,.09);}
+  .gallery-column .work-slide:last-child{border-bottom:0;}
   .work-slide img{
     position:relative !important;
     inset:auto !important;
-    display:block;
+    display:block !important;
     width:100% !important;
     height:auto !important;
     aspect-ratio:auto !important;
     object-fit:contain !important;
     object-position:center;
     background:#080808;
-    filter:grayscale(.18);
+    filter:grayscale(.12);
     transform:none;
     transition:transform .7s ease,filter .5s ease;
   }
-  .work-slide:hover img{transform:scale(1.025);filter:grayscale(0);}
+  .work-slide:hover img{transform:scale(1.018);filter:grayscale(0);}
   .slide-overlay{
-    top:auto;
-    bottom:0;
+    position:absolute !important;
+    inset:auto 0 0 0 !important;
     opacity:0;
     padding:28px 26px 24px;
-    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.92) 78%);
+    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.94) 80%);
     transition:opacity .35s ease;
   }
   .work-slide:hover .slide-overlay{opacity:1;}
@@ -346,93 +348,202 @@
   .work-carousel>.carousel-meta{display:none !important;}
 }
 
-/* Mobile selected-work carousel: cleaner card, complete image, better controls. */
+/* Mobile — swipeable stacked deck. No old-fashioned side-arrow UI. */
 @media (max-width:900px){
   .work{overflow:hidden;}
   .work-head{margin-bottom:34px;}
-  .work-carousel{padding:0 1px;}
+  .work-carousel{padding:0 1px;position:relative;}
   .work-track{
+    position:relative;
+    display:block !important;
     overflow:visible !important;
     border:0 !important;
     background:transparent !important;
+    min-height:0;
   }
+  .gallery-column{display:contents;}
   .work-slide,
-  .work-slide.is-active{
-    display:none;
-    position:relative;
+  .work-slide.is-active,
+  .work-slide.is-next,
+  .work-slide.is-prev{
+    width:100%;
     min-height:0 !important;
-    height:auto !important;
     max-height:none !important;
-    border:1px solid rgba(255,255,255,.13);
-    border-radius:18px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
     overflow:hidden;
     background:#0b0b0b;
-    box-shadow:0 24px 60px rgba(0,0,0,.35);
+    box-shadow:0 24px 70px rgba(0,0,0,.42);
   }
+  .work-slide{display:none;}
   .work-slide.is-active{
     display:block;
-    animation:mobileSlideIn .55s cubic-bezier(.22,.61,.36,1);
+    position:relative;
+    z-index:3;
+    animation:deckIn .55s cubic-bezier(.22,.61,.36,1);
   }
+  .work-slide.is-next,
+  .work-slide.is-prev{
+    display:block;
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    opacity:.38;
+    filter:brightness(.62);
+  }
+  .work-slide.is-next{transform:translateY(15px) scale(.965);}
+  .work-slide.is-prev{transform:translateY(-15px) scale(.965);opacity:.18;}
   .work-slide img{
     position:relative !important;
     inset:auto !important;
-    display:block;
+    display:block !important;
     width:100% !important;
     height:auto !important;
-    aspect-ratio:4 / 5;
+    aspect-ratio:auto !important;
     object-fit:contain !important;
     object-position:center;
     background:#0b0b0b;
-    filter:none;
+    filter:none !important;
     transform:none !important;
   }
   .slide-overlay{
-    position:relative;
-    left:auto;right:auto;bottom:auto;
+    position:relative !important;
+    inset:auto !important;
     padding:22px 20px 21px;
-    background:linear-gradient(180deg,#0b0b0b 0%,#090909 100%);
+    background:#0b0b0b;
   }
-  .slide-overlay span{font-size:8px;color:#888;}
-  .slide-overlay h3{
-    font-size:clamp(28px,8vw,38px);
-    line-height:.96;
-    letter-spacing:-.045em;
-    margin:8px 0 9px;
-  }
+  .slide-overlay span{font-size:8px;color:#888;letter-spacing:.16em;}
+  .slide-overlay h3{font-size:clamp(28px,8vw,38px);line-height:.96;letter-spacing:-.045em;margin:8px 0 9px;}
   .slide-overlay p{font-size:10px;line-height:1.5;color:#888;}
-  .work-carousel>.carousel-arrow{
-    width:46px;height:46px;
-    top:40%;
-    background:rgba(5,5,5,.72);
-    border-color:rgba(255,255,255,.2);
-    backdrop-filter:blur(12px);
-  }
-  .work-carousel>.carousel-arrow.prev{left:14px;}
-  .work-carousel>.carousel-arrow.next{right:14px;}
+  .work-carousel>.carousel-arrow{display:none !important;}
   .work-carousel>.carousel-meta{
-    margin-top:16px;
+    display:flex !important;
+    position:relative;
+    z-index:5;
+    margin-top:26px;
     padding:0 3px;
-    gap:10px;
+    gap:12px;
+    align-items:center;
   }
   .work-carousel .carousel-dots{gap:5px;}
   .work-carousel .carousel-dots button{width:18px;height:2px;}
   .work-carousel .carousel-dots button.active{width:32px;}
+  .work-carousel>.carousel-meta::after{
+    content:'SWIPE';
+    margin-left:auto;
+    font-size:8px;
+    letter-spacing:.2em;
+    color:#666;
+  }
 }
 
 @media (max-width:520px){
   .work-head h2{font-size:17vw;}
   .work-head p{font-size:13px;line-height:1.6;}
-  .work-slide.is-active{border-radius:16px;}
-  .work-slide img{aspect-ratio:4 / 5;}
+  .work-slide.is-active,.work-slide.is-next,.work-slide.is-prev{border-radius:17px;}
   .slide-overlay{padding:20px 18px 19px;}
   .slide-overlay h3{font-size:31px;}
   .slide-overlay p{font-size:10px;}
-  .work-carousel>.carousel-arrow{top:39%;width:44px;height:44px;}
-  .work-carousel>.carousel-arrow.prev{left:10px;}
-  .work-carousel>.carousel-arrow.next{right:10px;}
 }
 
-@keyframes mobileSlideIn{
-  from{opacity:0;transform:translateX(28px) scale(.985)}
+@keyframes deckIn{
+  from{opacity:0;transform:translateX(34px) rotate(.5deg) scale(.985)}
   to{opacity:1;transform:none}
+}
+
+/* ===== FINAL DESKTOP GALLERY FIX =====
+   Desktop: every artwork keeps its complete original image ratio.
+   Mobile: existing stacked swipe deck remains unchanged.
+*/
+@media (min-width:901px){
+  #work .work-carousel{
+    width:100%;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  #work .work-track{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    grid-template-rows:none !important;
+    align-items:start !important;
+    gap:0 !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    border:1px solid rgba(255,255,255,.14) !important;
+    background:#080808 !important;
+  }
+  #work .gallery-column{
+    display:flex !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    height:auto !important;
+    align-self:start !important;
+  }
+  #work .gallery-column + .gallery-column{
+    border-left:1px solid rgba(255,255,255,.12) !important;
+  }
+  #work .work-slide,
+  #work .work-slide.is-active,
+  #work .work-slide.is-next,
+  #work .work-slide.is-prev{
+    display:block !important;
+    position:relative !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    border:0 !important;
+    border-bottom:1px solid rgba(255,255,255,.12) !important;
+    border-radius:0 !important;
+    overflow:hidden !important;
+    background:#080808 !important;
+    animation:none !important;
+    transform:none !important;
+    opacity:1 !important;
+    filter:none !important;
+    box-shadow:none !important;
+  }
+  #work .gallery-column .work-slide:last-child{
+    border-bottom:0 !important;
+  }
+  #work .work-slide img{
+    position:relative !important;
+    inset:auto !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center !important;
+    background:#080808 !important;
+    filter:none !important;
+    transform:none !important;
+  }
+  #work .work-slide:hover img{
+    transform:scale(1.012) !important;
+    filter:none !important;
+  }
+  #work .slide-overlay{
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    top:auto !important;
+    opacity:0 !important;
+    padding:28px 26px 24px !important;
+    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.92) 100%) !important;
+    transition:opacity .3s ease !important;
+  }
+  #work .work-slide:hover .slide-overlay{opacity:1 !important;}
+  #work .slide-overlay h3{font-size:clamp(22px,2.2vw,38px) !important;}
+  #work .slide-overlay p{font-size:10px !important;}
+  #work .work-carousel > .carousel-arrow,
+  #work .work-carousel > .carousel-meta{
+    display:none !important;
+  }
 }
