@@ -60,3 +60,59 @@ window.addEventListener('scroll',()=>document.getElementById('nav').style.backgr
   window.addEventListener('resize',resize);
   resize(); requestAnimationFrame(frame);
 })();
+
+/* Swipeable project + results carousels */
+(() => {
+  function setupCarousel(root, slideSelector, countSelector, dotsSelector) {
+    const slides = [...root.querySelectorAll(slideSelector)];
+    const prev = root.querySelector('.carousel-arrow.prev');
+    const next = root.querySelector('.carousel-arrow.next');
+    const count = root.querySelector(countSelector);
+    const dotsWrap = root.querySelector(dotsSelector);
+    if (!slides.length) return;
+    let index = 0;
+    let startX = null;
+
+    const dots = slides.map((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      b.addEventListener('click', () => show(i));
+      dotsWrap?.appendChild(b);
+      return b;
+    });
+
+    function show(nextIndex) {
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      if (count) count.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    }
+
+    prev?.addEventListener('click', () => show(index - 1));
+    next?.addEventListener('click', () => show(index + 1));
+
+    const track = root.querySelector('.work-track, .impact-track');
+    track?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    track?.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 45) show(index + (dx < 0 ? 1 : -1));
+      startX = null;
+    }, {passive:true});
+
+    let down = false, mouseX = 0;
+    track?.addEventListener('mousedown', e => { down = true; mouseX = e.clientX; });
+    window.addEventListener('mouseup', e => {
+      if (!down) return;
+      const dx = e.clientX - mouseX;
+      if (Math.abs(dx) > 55) show(index + (dx < 0 ? 1 : -1));
+      down = false;
+    });
+
+    show(0);
+  }
+
+  setupCarousel(document.querySelector('[data-carousel="work"]'), '.work-slide', '.carousel-count', '.carousel-dots');
+  setupCarousel(document.querySelector('[data-carousel="impact"]'), '.impact-slide', '.impact-count', '.impact-dots');
+})();

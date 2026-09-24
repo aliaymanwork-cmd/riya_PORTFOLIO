@@ -27,21 +27,28 @@
   </header>
 
   <main id="top">
-    <section class="hero section-pad">
+    <section class="hero section-pad" id="top">
       <div class="hero-bg"></div>
       <div class="hero-top"><span></span><a href="mailto:riee19267@gmail.com">riee19267@gmail.com</a></div>
-      <div class="hero-copy reveal">
-        <p class="eyebrow">DIGITAL MARKETING · CONTENT · STRATEGY</p>
-        <h1>Digital<br><em>Marketer</em></h1>
-        <p class="hero-intro">Where creativity meets strategy — turning ideas into memorable digital experiences and measurable growth.</p>
-        <a class="circle-cta" href="#work">Explore<br>work <span>↘</span></a>
-      </div>
-      <div class="hero-visual">
-        <img src="assets/hero.jpg" alt="Portfolio visual" />
+      <div class="hero-layout">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">DIGITAL MARKETING · CONTENT · STRATEGY</p>
+          <h1>Digital <em>Marketer</em></h1>
+          <div class="hero-visual mobile-hero-photo">
+            <img src="assets/hero.jpg" alt="Riya Fathima working on a laptop" />
+          </div>
+          <p class="hero-intro">Where creativity meets strategy — turning ideas into memorable digital experiences and measurable growth.</p>
+          <div class="hero-actions">
+            <a class="hero-link-primary" href="#work">Explore</a>
+            <a class="hero-link-secondary" href="#work">work <span>↘</span></a>
+          </div>
+        </div>
+        <div class="hero-visual desktop-hero-photo">
+          <img src="assets/hero.jpg" alt="Riya Fathima working on a laptop" />
+        </div>
       </div>
       <div class="hero-bottom"><span>CALICUT · INDIA</span><span>SCROLL ↓</span></div>
     </section>
-
     <section id="about" class="about section-pad">
       <div class="section-label">01 / ABOUT</div>
       <div class="about-grid">
@@ -64,6 +71,7 @@
     <section id="strategy" class="strategy section-pad dark-panel">
       <div class="strategy-copy"><div class="section-label">03 / STRATEGY</div><h2>Ideas with a <span>purpose.</span></h2><p>Every campaign starts with a clear objective. I plan, create, launch and measure — turning audience attention into meaningful results.</p><div class="pill-row"><span>Research</span><span>Plan</span><span>Create</span><span>Measure</span></div></div>
       <div class="testimonial-card reveal">
+        <div class="testimonial-label">WORDS FROM A REAL CLIENT</div>
         <div class="quote-mark">“</div>
         <p class="testimonial-quote">Riya brought structure, creativity and consistency to our content. She understood the brand quickly and turned ideas into content that actually felt like us.</p>
         <div class="testimonial-person">
@@ -71,20 +79,79 @@
           <div><strong>Ayman</strong><span>Client · Brand Project</span></div>
         </div>
       </div>
+      <div class="testimonial-card testimonial-card-secondary reveal">
+        <div class="testimonial-label">ANOTHER CLIENT NOTE</div>
+        <div class="quote-mark">“</div>
+        <p class="testimonial-quote">Riya has a great eye for content and knows how to make a brand feel fresh without losing its identity. The communication was easy, the ideas were thoughtful, and the final work felt genuinely polished.</p>
+        <div class="testimonial-person">
+          <div class="testimonial-avatar">AJ</div>
+          <div><strong>Ajmal</strong><span>Client · Digital Campaign</span></div>
+        </div>
+      </div>
     </section>
 
     <section id="work" class="work section-pad">
       <div class="section-label">04 / SELECTED WORK</div>
-      <div class="work-head"><h2>Selected <em>work</em></h2><p>A collection of campaign, content and social-media work.</p></div>
-      <div class="work-grid">
-        <article class="project large reveal"><img src="assets/work-01.jpg" alt="Campaign project"><div><span>01 / CAMPAIGN</span><h3>Performance-led storytelling</h3></div></article>
-        <article class="project reveal"><img src="assets/work-02.jpg" alt="Social media project"><div><span>02 / SOCIAL</span><h3>Community & content</h3></div></article>
-        <article class="project reveal"><img src="assets/work-03.jpg" alt="Creative project"><div><span>03 / CREATIVE</span><h3>Brand visual direction</h3></div></article>
+      <div class="work-head"><h2>Selected <em>work</em></h2><p>Swipe through campaign, content and social-media work — one project at a time.</p></div>
+      <div class="work-carousel" data-carousel="work">
+        <button class="carousel-arrow prev" type="button" aria-label="Previous project">←</button>
+        <div class="work-track">
+          <article class="work-slide is-active">
+            <img src="assets/gallery/work.jpeg" alt="Selected social media work 01">
+            <div class="slide-overlay"><span>01 / SOCIAL CAMPAIGN</span><h3>Content that catches attention.</h3><p>Creative direction · Social content · Brand storytelling</p></div>
+          </article>
+          <article class="work-slide">
+            <img src="assets/gallery/work1.jpeg" alt="Selected social media work 02">
+            <div class="slide-overlay"><span>02 / CONTENT</span><h3>Visual stories with a clear voice.</h3><p>Content planning · Visual identity · Publishing</p></div>
+          </article>
+          <article class="work-slide">
+            <img src="assets/gallery/work2.jpeg" alt="Selected social media work 03">
+            <div class="slide-overlay"><span>03 / CREATIVE</span><h3>Ideas made instantly scrollable.</h3><p>Creative concepts · Campaign assets · Design</p></div>
+          </article>
+          <article class="work-slide">
+            <img src="assets/gallery/work3.jpeg" alt="Selected social media work 04">
+            <div class="slide-overlay"><span>04 / BRAND</span><h3>A stronger visual presence.</h3><p>Brand consistency · Content systems · Strategy</p></div>
+          </article>
+          <article class="work-slide">
+            <img src="assets/gallery/work4.png" alt="Selected social media work 05">
+            <div class="slide-overlay"><span>05 / CAMPAIGN</span><h3>Campaigns built to be remembered.</h3><p>Creative execution · Messaging · Growth</p></div>
+          </article>
+          <article class="work-slide">
+            <img src="assets/gallery/work5.png" alt="Selected social media work 06">
+            <div class="slide-overlay"><span>06 / SOCIAL</span><h3>From idea to everyday presence.</h3><p>Community · Content · Performance</p></div>
+          </article>
+        </div>
+        <button class="carousel-arrow next" type="button" aria-label="Next project">→</button>
+        <div class="carousel-meta"><span class="carousel-count">01 / 06</span><div class="carousel-dots" aria-label="Project slides"></div><span>SWIPE / DRAG</span></div>
+      </div>
+    </section>
+
+    <section class="impact section-pad">
+      <div class="section-label">05 / PROJECT IMPACT</div>
+      <div class="impact-head"><div><h2>Growth <em>in motion.</em></h2><p>Showcase the upward movement behind the work — replace the values below with real campaign results whenever you want.</p></div><div class="impact-note">EDITABLE<br>RESULTS</div></div>
+      <div class="impact-carousel" data-carousel="impact">
+        <button class="carousel-arrow prev" type="button" aria-label="Previous impact slide">←</button>
+        <div class="impact-track">
+          <article class="impact-slide is-active">
+            <div class="graph-frame"><img src="assets/graphs/graph1.PNG" alt="Project growth graph"></div>
+            <div class="impact-copy"><span>01 / GROWTH SNAPSHOT</span><h3>Upward momentum.</h3><p>Use this space to show how a campaign moved from launch to stronger performance.</p><div class="impact-stats"><div><b>+68%</b><small>REACH</small></div><div><b>+41%</b><small>ENGAGEMENT</small></div><div><b>+29%</b><small>PROFILE ACTIONS</small></div></div></div>
+          </article>
+          <article class="impact-slide">
+            <div class="impact-visual metric-visual"><span>CAMPAIGN REACH</span><strong>84K</strong><div class="growth-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small>EDIT THE VALUE IN INDEX.HTML</small></div>
+            <div class="impact-copy"><span>02 / REACH</span><h3>More people. More attention.</h3><p>Highlight the audience growth created by a consistent content system.</p><div class="impact-stats"><div><b>84K</b><small>REACH</small></div><div><b>+52%</b><small>DISCOVERY</small></div><div><b>6.2K</b><small>NEW VISITS</small></div></div></div>
+          </article>
+          <article class="impact-slide">
+            <div class="impact-visual metric-visual"><span>ENGAGEMENT</span><strong>7.8%</strong><div class="growth-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small>EDIT THE VALUE IN INDEX.HTML</small></div>
+            <div class="impact-copy"><span>03 / ENGAGEMENT</span><h3>Content people respond to.</h3><p>Turn likes, saves, shares and comments into a clear proof point for the project.</p><div class="impact-stats"><div><b>7.8%</b><small>ENGAGEMENT</small></div><div><b>2.4K</b><small>SAVES</small></div><div><b>1.1K</b><small>SHARES</small></div></div></div>
+          </article>
+        </div>
+        <button class="carousel-arrow next" type="button" aria-label="Next impact slide">→</button>
+        <div class="carousel-meta"><span class="impact-count">01 / 03</span><div class="impact-dots carousel-dots"></div><span>SWIPE / DRAG</span></div>
       </div>
     </section>
 
     <section class="page-handling section-pad">
-      <div class="section-label">05 / PAGE HANDLING</div>
+      <div class="section-label">06 / PAGE HANDLING</div>
       <div class="page-title"><h2>Social media<br><span>that feels alive.</span></h2><p>Content calendars, daily publishing, community engagement, creative testing and reporting — all working together.</p></div>
       <div class="social-dashboard reveal">
         <div class="dashboard-top"><span>CONTENT SYSTEM</span><span>LIVE / 2026</span></div>
@@ -98,9 +165,9 @@
     </section>
 
     <section id="contact" class="contact section-pad">
-      <div class="section-label">06 / CONTACT</div>
+      <div class="section-label">07 / CONTACT</div>
       <div class="contact-main"><p class="eyebrow">HAVE A PROJECT?</p><h2>Let’s make<br><em>something memorable.</em></h2><a class="big-mail" href="mailto:riee19267@gmail.com">riee19267@gmail.com <span>↗</span></a></div>
-      <div class="contact-bottom"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="https://wa.me/919000000000" target="_blank" rel="noreferrer">WhatsApp</a><span>© 2026 Riya Fathima</span></div>
+      <div class="contact-bottom"><a href="https://www.instagram.com/riee.storiees/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.linkedin.com/in/riya-fathima-424171328/" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://wa.me/918289878754" target="_blank" rel="noreferrer">WhatsApp</a><span>© 2026 Riya Fathima</span></div>
     </section>
   </main>
   <script src="js/app.js"></script>
